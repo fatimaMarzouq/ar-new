@@ -14,6 +14,12 @@
                 <div class="h-32 w-32 bg-gray-300 "></div>
             {% endif %}
            </a><br>
+              {% for assetfile in  asset.multi_uploads %}
+               <span>
+                    {{ assetfile }}
+                </span>
+            {% endfor %}
+              <br>
             <span class="text-muted">Expiry_date: {{ asset.Expiry_date }} <br> Expiry_time: {{ asset.Expiry_time }}  </span>
           </div>
           <div class="card-body">

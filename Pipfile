@@ -29,6 +29,7 @@ gunicorn = "==20.0.4"
 babel = "*"
 django-multivalueformfield = "*"
 django-intl-tel-input = "*"
+django-better-admin-arrayfield = "*"
 
 [dev-packages]
 

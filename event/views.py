@@ -74,7 +74,7 @@ def asset_create(request):
 
             # print(request.POST)
 
-            return redirect('/')
+            return redirect(reverse_lazy('Assets_list'))
 
         else:
             print(form.errors)

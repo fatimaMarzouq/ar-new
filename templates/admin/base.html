@@ -1,0 +1,6 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block footer %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/django_better_admin_arrayfield.min.js' %}"></script>
+{% endblock  %} 

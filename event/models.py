@@ -7,13 +7,14 @@ import qrcode
 from io import BytesIO
 from django.core.files import File
 from PIL import Image, ImageDraw
-from django.contrib.postgres.fields import ArrayField
+from django_better_admin_arrayfield.models.fields import ArrayField
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 User = get_user_model()
 
 
+class Asset(models.Model,DynamicArrayMixin):
 
-class Asset(models.Model):
     id = models.UUIDField(
         primary_key=True,
         # db_index=True,  # new
@@ -44,7 +45,7 @@ class Asset(models.Model):
 
 
     def save(self, *args,**kwargs):
-        qrcode_img = qrcode.make("https://heshamar.herokuapp.com/"+str(self.id)+"/assets_details")
+        qrcode_img = qrcode.make("https://mighty-garden-90398.herokuapp.com/"+str(self.id)+"/assets_details")
         canvas = Image.new('RGB',(450,450),'white')
         draw = ImageDraw.Draw(canvas)
         canvas.paste(qrcode_img)
@@ -97,7 +98,7 @@ class Location(models.Model):
         return reverse('location_list')
 
     def save(self, *args,**kwargs):
-        qrcode_img = qrcode.make("https://heshamar.herokuapp.com/"+str(self.id)+"/assets_details")
+        qrcode_img = qrcode.make("https://mighty-garden-90398.herokuapp.com/"+str(self.id)+"/assets_details")
         canvas = Image.new('RGB', (350, 350), 'white')
         canvas.paste(qrcode_img)
         fname = f'qr_code-{self.name}.png'
@@ -134,7 +135,7 @@ class Event(models.Model):
         return reverse('events')
 
     def save(self, *args,**kwargs):
-        qrcode_img = qrcode.make("http://127.0.0.1:8000/"+str(self.id)+"/event_details")
+        qrcode_img = qrcode.make("https://mighty-garden-90398.herokuapp.com/"+str(self.id)+"/event_details")
         canvas = Image.new('RGB',(290,290),'white')
         draw = ImageDraw.Draw(canvas)
         canvas.paste(qrcode_img)

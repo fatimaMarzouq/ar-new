@@ -2,8 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from crispy_forms.helper import FormHelper
 from .models import Event, Location, Asset
-from django.contrib.postgres.fields import ArrayField
-
+from django_better_admin_arrayfield.models.fields import ArrayField
+from django_better_admin_arrayfield.forms.widgets import DynamicArrayWidget
 
 
 class EventCreationForm(forms.ModelForm):
