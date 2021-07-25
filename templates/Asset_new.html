@@ -72,6 +72,7 @@
 
 
                    </div>
+                    <input class="count" type="hidden" name="count">
                 </div>
             </div>
         </div>
@@ -144,7 +145,23 @@
     </div>
 <script>
 
+window.addEventListener("DOMContentLoaded", function(){
+num=1; document.querySelector(".count").value=num;
+    document.querySelector(".add-location-container").onclick=function(){
+        num= num+1;
+         document.querySelector(".count").value=num;
+    };
 
+     document.querySelector(".remove-location-container").onclick=function(){
+     if(num>1){
+     num=num-1;
+
+      document.querySelector(".count").value=num;
+     }
+    };
+
+
+});
     document.getElementById("add_image").onclick=function (ev) {
 
         var image=document.getElementById("images");

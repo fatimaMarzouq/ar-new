@@ -46,6 +46,8 @@ class AssetListView(ListView):
 
 def asset_create(request):
     locations = []
+    longitudes=[]
+    latitudes=[]
     asset_files = []
     form = AssetCreationForm(request.POST or None, request.FILES)
     i = 1
@@ -54,6 +56,12 @@ def asset_create(request):
             i = i + 1
             if i > 5:
                 locations.append(request.POST.getlist('location' + str(i - 5)))
+        im = 1
+        while im <= int(request.POST['count']):
+            longitudes.append(request.POST['longitude' + str(im)])
+            latitudes.append(request.POST['latitude' + str(im)])
+            im += 1
+
         if form.is_valid():
             files = request.FILES.getlist('file[]')
 
@@ -63,9 +71,9 @@ def asset_create(request):
 
             # print(asset_files)
             location = Asset(multi_uploads=files, Expiry_date=request.POST['Expiry_date'],
-                             Expiry_time=request.POST['Expiry_time'], Multi_Locations=locations)
+                             Expiry_time=request.POST['Expiry_time'], longitude1=longitudes,latitude1=latitudes)
             location.save(force_insert=True)
-
+            # loc , created=Location.objects.update_or_create(id=request.POST.get('id', False), defaults={"Longitude1": request.POST.get('longitude1',False),"Latitude1": request.POST.get('latitude1',False),})
             Multi_Locations = locations
             Multi_assets = files
             # print(request.POST.getlist('location1')[0])
@@ -160,13 +168,13 @@ class AssetDetailView(DetailView):
     template_name = 'Asset_detail.html'
 
 
-class AssetUpdateView(UpdateView):
-    model = Asset
-    form_class = AssetCreationForm
-    template_name = 'Asset_edit.html'
+# class AssetUpdateView(UpdateView):
+#     model = Asset
+#     form_class = AssetCreationForm
+#     template_name = 'Asset_edit.html'         emailvalue= form.cleaned_data.get("email")
 
 
-def asset_update(request, pk):
+def AssetUpdateView(request, pk):
     asset = Asset.objects.get(id=pk)
     locations = []
     asset_files = []

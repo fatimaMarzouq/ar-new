@@ -52,7 +52,7 @@ class AssetCreationForm(forms.ModelForm):
 
     class Meta:
         model = Asset
-        fields = ['Expiry_date', 'Expiry_time']
+        fields = ['Expiry_date', 'Expiry_time',]
         widgets = {
             'Expiry_date': forms.DateInput(format=('%Y-%m-%d'),
                                              attrs={'class': 'datepicker1', 'placeholder': 'Select Date', 'type': 'date'}),
@@ -67,31 +67,32 @@ class AssetCreationForm(forms.ModelForm):
 
 class LocationCreationForm(forms.ModelForm):
 
-    def __init__(self, *args, **kwargs):
-        """ Grants access to the request object so that only members of the current user
-        are given as options"""
-
-        self.request = kwargs.pop('request')
-        super(LocationCreationForm, self).__init__(*args, **kwargs)
-
-        self.fields['Assets'].queryset = Asset.objects.filter(
-            user=self.request.user)
+    # def __init__(self, *args, **kwargs):
+    #     """ Grants access to the request object so that only members of the current user
+    #     are given as options"""
+    #
+    #     self.request = kwargs.pop('request')
+    #     super(LocationCreationForm, self).__init__(*args, **kwargs)
+    #
+    #     self.fields['Assets'].queryset = Asset.objects.filter(
+    #         user=self.request.user)
 
 
     class Meta:
         model = Location
-        fields = ['Name', 'Longitude', 'Latitude', 'Google_maps_link', 'Plus_code', 'Radius', 'Assets']
-        widgets = {
-            'Expiry_date': forms.DateInput(format=('%Y-%m-%d'),
-                                             attrs={'class': 'datepicker1', 'placeholder': 'Select Date', 'type': 'date'}),
-            'Expiry_time': forms.TimeInput(format='%H:%M',attrs={'type': 'time'}),
-        }
+        # fields = ['Name', 'Longitude', 'Latitude', 'Google_maps_link', 'Plus_code', 'Radius', 'Assets']
+        fields = ['Longitude1', 'Latitude1', 'Assets']
+        # widgets = {
+        #     'Expiry_date': forms.DateInput(format=('%Y-%m-%d'),
+        #                                      attrs={'class': 'datepicker1', 'placeholder': 'Select Date', 'type': 'date'}),
+        #     'Expiry_time': forms.TimeInput(format='%H:%M',attrs={'type': 'time'}),
+        # }
 
     Longitude = forms.NumberInput()
     Latitude = forms.NumberInput()
-    Radius = forms.NumberInput()
-    Google_maps_link = forms.CharField()
-    Plus_code = forms.CharField()
+    # Radius = forms.NumberInput()
+    # Google_maps_link = forms.CharField()
+    # Plus_code = forms.CharField()
 
 
 

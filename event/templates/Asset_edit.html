@@ -67,6 +67,8 @@
 
 
                    </div>
+                    <input class="count" type="hidden" name="count" >
+
                 </div>
             </div>
         </div>
@@ -123,7 +125,23 @@
 
      </form>
 <script>
+window.addEventListener("DOMContentLoaded", function(){
+num=document.querySelector(".count").value;
+    document.querySelector(".add-location-container").onclick=function(){
+        num= num+1;
+         document.querySelector(".count").value=num;
+    };
 
+     document.querySelector(".remove-location-container").onclick=function(){
+     if(num>1){
+     num=num-1;
+
+      document.querySelector(".count").value=num;
+     }
+    };
+
+
+});
 
     document.getElementById("add_image").onclick=function (ev) {
 

@@ -100,7 +100,7 @@ function createInput(name, i) {
     coordInput.className = "text-input coordinates-inputs is-" + name;
     coordInput.type = 'text';
     coordInput.id = `${name}${i}`;
-    coordInput.name = i;
+    coordInput.name = `${name}${i}`;
     coordInput.title = name + i;
     coordInput.addEventListener('blur', check_lat_lon)
     return coordInput;
@@ -205,10 +205,10 @@ class MapPickLocation extends HTMLElement {
                 return;
             }
 
-            const latitude = document.querySelector(`.latitude-elements input[name="${locationNumber}"]`);
+            const latitude = document.querySelector(`.latitude-elements input[name="latitude${locationNumber}"]`);
             latitude.value = lat;
 
-            const longitude = document.querySelector(`.longitude-elements input[name="${locationNumber}"]`);
+            const longitude = document.querySelector(`.longitude-elements input[name="longitude${locationNumber}"]`);
             longitude.value = lng;
 
             updateLocationParam();
