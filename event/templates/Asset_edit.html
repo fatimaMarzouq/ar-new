@@ -37,6 +37,9 @@
     <script src="{% static 'studio-master/utils/fileTemplate.js' %}"></script>
     <script src="{% static 'studio-master/utils/fileHandler.js' %}"></script>
     <script src="{% static 'studio-master/pages/location/location.js' %}" defer></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
+
+
 </head>
 <body>
     <div class="pages-content">
@@ -67,7 +70,7 @@
 
 
                    </div>
-                    <input class="count" type="hidden" name="count" >
+                    <input class="count" type="hidden" name="count" value="{{ count }}">
 
                 </div>
             </div>
@@ -113,20 +116,40 @@
         </div>
 
 
-         <div id="div_id_Expiry_date  " class="mb-3 w-1/2 ml-5">
-                {{ form.Expiry_date|as_crispy_field }}
+        <div id="div_id_Expiry_date  " class="mb-3 w-1/2 ml-5">
+             <p class="lead my-5">3- Choose the deadline</p>
+              <label for="id_Expiry_date" class="block text-gray-700 text-sm font-bold mb-2">
+            Expiry date
+        </label>
+        <input type="date" name="Expiry_date" class="datepicker1 dateinput focus:outline-none leading-normal px-4 rounded-lg  appearance-none text-gray-700 w-full border block py-2 bg-white" placeholder="Select Date"  id="id_Expiry_date" value="{{ Expiry_date }}">
+
              </div>
               <div id="div_id_Expiry_time" class="mb-3 w-1/2 ml-5">
-                 {{ form.Expiry_time|as_crispy_field }}
+                   <label for="id_Expiry_time" class="block text-gray-700 text-sm font-bold mb-2">
+            Expiry time
+         </label>
+          <input type="time" name="Expiry_time" class="timeinput focus:outline-none leading-normal px-4 rounded-lg appearance-none text-gray-700 w-full border block py-2 bg-white"  id="id_Expiry_time" value="{{ Expiry_time}}">
+                  <p id="error_1_id_Expiry_time" class="text-red-500 text-xs italic">
+
             </div>
 
 
     <button value="submit" style="background-color:#00992D" class=" text-white ml-5 px-16 py-3 my-5 rounded outline-none block " name="Submit">Submit</button>
-
      </form>
 <script>
+let long_lat= {{ long_lat | safe }};
 window.addEventListener("DOMContentLoaded", function(){
+
+
+
 num=document.querySelector(".count").value;
+for (let i=2 ; i<=num ; i++){
+document.querySelector(".add-location-container").click();
+}
+for (let i=1 ; i<=long_lat.length ; i++){
+document.querySelector("#latitude" + i).value=long_lat[i-1].Lat;
+document.querySelector("#longitude" + i).value=long_lat[i-1].Long;
+}
     document.querySelector(".add-location-container").onclick=function(){
         num= num+1;
          document.querySelector(".count").value=num;

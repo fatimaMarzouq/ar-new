@@ -30,6 +30,7 @@ babel = "*"
 django-multivalueformfield = "*"
 django-intl-tel-input = "*"
 django-better-admin-arrayfield = "*"
+django-shapeshifter = "*"
 
 [dev-packages]
 

@@ -97,7 +97,7 @@ function updateLatLngInnerHtmlInvalidCoords() {
 
 function createInput(name, i) {
     let coordInput = document.createElement('input');
-    coordInput.className = "text-input coordinates-inputs is-" + name;
+    coordInput.className = "dynamicarraywidget text-input coordinates-inputs is-" + name;
     coordInput.type = 'text';
     coordInput.id = `${name}${i}`;
     coordInput.name = `${name}${i}`;

@@ -13,11 +13,24 @@ from django.contrib.auth.mixins import (
 )
 from django.db.models import Q
 import datetime
+from shapeshifter.views import MultiFormView
 
 
-class HomePageView(TemplateView):
+
+# class HomePageView(TemplateView):
+#     template_name = 'home.html'
+
+
+class HomePageView(MultiFormView):
+    form_classes = (AssetCreationForm, LocationCreationForm)
     template_name = 'home.html'
+    success_url = reverse_lazy('Assets_list')
 
+    def forms_valid(self):
+        forms = self.get_forms()
+        # contact_form = forms['AssetCreationForm']
+        # interest_form = forms['LocationCreationForm']
+        return super().forms_valid()
 
 def asset_list(request):
     now = datetime.datetime.now()
@@ -45,21 +58,17 @@ class AssetListView(ListView):
 
 
 def asset_create(request):
-    locations = []
-    longitudes=[]
-    latitudes=[]
-    asset_files = []
     form = AssetCreationForm(request.POST or None, request.FILES)
-    i = 1
+
     if request.method == 'POST':
-        for e in request.POST:
-            i = i + 1
-            if i > 5:
-                locations.append(request.POST.getlist('location' + str(i - 5)))
+
         im = 1
+        IDs=[]
         while im <= int(request.POST['count']):
-            longitudes.append(request.POST['longitude' + str(im)])
-            latitudes.append(request.POST['latitude' + str(im)])
+            location = Location(Longitude1=request.POST['longitude' + str(im)],
+                                Latitude1=request.POST['latitude' + str(im)])
+            location.save(force_insert=True)
+            IDs.append(location.id)
             im += 1
 
         if form.is_valid():
@@ -69,18 +78,14 @@ def asset_create(request):
                 fs = FileSystemStorage()
                 file_path = fs.save(asset.name, asset)
 
-            # print(asset_files)
-            location = Asset(multi_uploads=files, Expiry_date=request.POST['Expiry_date'],
-                             Expiry_time=request.POST['Expiry_time'], longitude1=longitudes,latitude1=latitudes)
-            location.save(force_insert=True)
-            # loc , created=Location.objects.update_or_create(id=request.POST.get('id', False), defaults={"Longitude1": request.POST.get('longitude1',False),"Latitude1": request.POST.get('latitude1',False),})
-            Multi_Locations = locations
-            Multi_assets = files
-            # print(request.POST.getlist('location1')[0])
-            # print(locations)
-            print(Multi_assets)
+            asset = Asset(multi_uploads=files, Expiry_date=request.POST['Expiry_date'],
+                             Expiry_time=request.POST['Expiry_time'],)
+            asset.save(force_insert=True)
+            asset.Locations.set(IDs)
 
-            # print(request.POST)
+            Multi_assets = files
+
+            print(Multi_assets)
 
             return redirect(reverse_lazy('Assets_list'))
 
@@ -93,6 +98,64 @@ def asset_create(request):
                }
     return render(request, "Asset_new.html", context)
 
+
+def AssetUpdateView(request, pk):
+    asset = Asset.objects.get(id=pk)
+    form = AssetCreationForm(request.POST or None, request.FILES)
+    Expiry_date = asset.Expiry_date.strftime("%Y-%m-%d")
+    Expiry_time=asset.Expiry_time.strftime("%H:%M")
+    count=len(asset.Locations.all())
+    long_lat=[]
+    for loc in asset.Locations.all():
+        long_lat.append({"Long": loc.Longitude1, "Lat": loc.Latitude1})
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            im = 1
+            IDs = []
+            for loc in asset.Locations.all():
+                location, created = Location.objects.update_or_create(
+                    id=loc.id,
+                    defaults={'Longitude1': request.POST['longitude' + str(im)],
+                              'Latitude1': request.POST['latitude' + str(im)]},
+                )
+                IDs.append(location.id)
+                im += 1
+            files = request.FILES.getlist('file[]')
+
+            for asset in files:
+                fs = FileSystemStorage()
+                file_path = fs.save(asset.name, asset)
+
+            # asset = Asset(multi_uploads=files, Expiry_date=request.POST['Expiry_date'],
+            #               Expiry_time=request.POST['Expiry_time'], )
+            # asset.save(force_insert=True)
+            # asset.Locations.set(IDs)
+            obj, created = Asset.objects.update_or_create(
+                id=pk,
+                defaults={'multi_uploads':files, 'Expiry_date':request.POST['Expiry_date'],
+                          'Expiry_time':request.POST['Expiry_time'],},
+            )
+            obj.Locations.set(IDs)
+
+            Multi_assets = files
+
+            print(Multi_assets)
+
+            return redirect(reverse_lazy('Assets_list'))
+
+        else:
+            print(form.errors)
+    context = {
+        "asset": asset,
+        "form":form,
+        "Expiry_date": Expiry_date,
+        "Expiry_time": Expiry_time,
+        "count":count,
+        "long_lat":long_lat,
+    }
+    return render(request, "Asset_edit.html", context)
 
 # def asset_create(request):
 #     # if this is a POST request we need to process the form data
@@ -171,41 +234,8 @@ class AssetDetailView(DetailView):
 # class AssetUpdateView(UpdateView):
 #     model = Asset
 #     form_class = AssetCreationForm
-#     template_name = 'Asset_edit.html'         emailvalue= form.cleaned_data.get("email")
-
-
-def AssetUpdateView(request, pk):
-    asset = Asset.objects.get(id=pk)
-    locations = []
-    asset_files = []
-    form = AssetCreationForm(request.POST or None, request.FILES)
-    i = 1
-    if request.method == 'POST':
-        for e in request.POST:
-            i = i + 1
-            if i > 5:
-                locations.append(request.POST.getlist('location' + str(i - 5)))
-        if form.is_valid():
-            files = request.FILES.getlist('file[]')
-
-            for asset in files:
-                fs = FileSystemStorage()
-                file_path = fs.save(asset.name, asset)
-
-            # print(asset_files)
-            location = Asset(multi_uploads=files, Expiry_date=request.POST['Expiry_date'],
-                             Expiry_time=request.POST['Expiry_time'], Multi_Locations=locations)
-            location.save(force_insert=True)
-
-            Multi_Locations = locations
-            Multi_assets = files
-            # print(request.POST.getlist('location1')[0])
-            # print(locations)
-            print(Multi_assets)
-    context = {
-        "asset": asset
-    }
-    return render(request, "Asset_edit.html", context)
+#     template_name = 'Asset_edit.html'
+# #     emailvalue= form.cleaned_data.get("email")
 
 
 class AssetDeleteView(DeleteView):
