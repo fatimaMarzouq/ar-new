@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c33984d5-294c-420a-adba-59bd5720574d" name="Default Changelist" comment="add mutible locations">
+    <list default="true" id="c33984d5-294c-420a-adba-59bd5720574d" name="Default Changelist" comment="edit mutible locations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/event/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/event/templates/Asset_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/event/templates/Asset_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/event/templates/Asset_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/event/templates/Asset_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/event/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/event/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/event/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/event/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/studio-master/components/map/map-pick-location.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/studio-master/components/map/map-pick-location.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/staticfiles.json" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/staticfiles.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/studio-master/components/map/map-pick-location.js" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/studio-master/components/map/map-pick-location.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/staticfiles/studio-master/components/map/map-pick-location.js.gz" beforeDir="false" afterPath="$PROJECT_DIR$/staticfiles/studio-master/components/map/map-pick-location.js.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Asset_new.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Asset_new.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,20 +82,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1624440366781</updated>
-    </task>
-    <task id="LOCAL-00040" summary="muliple locations">
-      <created>1624824350887</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1624824350887</updated>
-    </task>
-    <task id="LOCAL-00041" summary="muliple locations">
-      <created>1624824930997</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1624824930997</updated>
     </task>
     <task id="LOCAL-00042" summary="muliple locations">
       <created>1624824962737</created>
@@ -431,7 +412,21 @@
       <option name="project" value="LOCAL" />
       <updated>1627242614824</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="edit mutible locations">
+      <created>1627559134773</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1627559134773</updated>
+    </task>
+    <task id="LOCAL-00090" summary="edit mutible locations">
+      <created>1627559159788</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1627559159788</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -458,6 +453,7 @@
     <MESSAGE value="hugkk" />
     <MESSAGE value="qr" />
     <MESSAGE value="add mutible locations" />
-    <option name="LAST_COMMIT_MESSAGE" value="add mutible locations" />
+    <MESSAGE value="edit mutible locations" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit mutible locations" />
   </component>
 </project>

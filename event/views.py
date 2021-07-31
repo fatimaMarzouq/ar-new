@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic import TemplateView, ListView
-from .models import Event, Asset, Location
+from .models import Event, Asset, Location ,FileUplaod
 from .forms import EventCreationForm, AssetCreationForm, LocationCreationForm
 from django.views.generic import ListView, DetailView  # new
 from django.urls import reverse_lazy
@@ -62,26 +62,29 @@ def asset_create(request):
 
     if request.method == 'POST':
 
-        im = 1
-        IDs=[]
-        while im <= int(request.POST['count']):
-            location = Location(Longitude1=request.POST['longitude' + str(im)],
-                                Latitude1=request.POST['latitude' + str(im)])
-            location.save(force_insert=True)
-            IDs.append(location.id)
-            im += 1
-
         if form.is_valid():
             files = request.FILES.getlist('file[]')
-
+            im = 1
+            IDs = []
+            while im <= int(request.POST['count']):
+                location = Location(Longitude1=request.POST['longitude' + str(im)],
+                                    Latitude1=request.POST['latitude' + str(im)])
+                location.save(force_insert=True)
+                IDs.append(location.id)
+                im += 1
+            filesIDs = []
             for asset in files:
                 fs = FileSystemStorage()
                 file_path = fs.save(asset.name, asset)
+                # uploadedFile = FileUplaod(file=asset.read())
+                # uploadedFile.save(force_insert=True)
+                # filesIDs.append(uploadedFile.id)
 
             asset = Asset(multi_uploads=files, Expiry_date=request.POST['Expiry_date'],
                              Expiry_time=request.POST['Expiry_time'],)
             asset.save(force_insert=True)
             asset.Locations.set(IDs)
+            asset.files.set(filesIDs)
 
             Multi_assets = files
 
@@ -106,6 +109,10 @@ def AssetUpdateView(request, pk):
     Expiry_time=asset.Expiry_time.strftime("%H:%M")
     count=len(asset.Locations.all())
     long_lat=[]
+    allAssets=[]
+    for aset in asset.multi_uploads:
+        allAssets.append(aset)
+    allAssetsNum=len(allAssets)
     for loc in asset.Locations.all():
         long_lat.append({"Long": loc.Longitude1, "Lat": loc.Latitude1})
 
@@ -140,7 +147,6 @@ def AssetUpdateView(request, pk):
             obj.Locations.set(IDs)
 
             Multi_assets = files
-
             print(Multi_assets)
 
             return redirect(reverse_lazy('Assets_list'))
@@ -154,6 +160,7 @@ def AssetUpdateView(request, pk):
         "Expiry_time": Expiry_time,
         "count":count,
         "long_lat":long_lat,
+        "allAssetsNum":allAssetsNum
     }
     return render(request, "Asset_edit.html", context)
 

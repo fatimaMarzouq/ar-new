@@ -28,13 +28,13 @@
 
             </a-assets>
 
-            {% for location in object.Multi_Locations   %}
+            {% for location in object.Locations.all   %}
                 <a-entity
                     look-at="[gps-camera]"
                     animation-mixer="loop: repeat"
                     gltf-model="#animated-asset"
                     scale="16.551939061849072 16.551939061849072 16.551939061849072"
-                    gps-entity-place="latitude: {{ location.0 }}; longitude: {{ location.1 }};"
+                    gps-entity-place="latitude: {{ location.Latitude1 }}; longitude: {{ location.Longitude1 }};"
                 ></a-entity>
             {% endfor %}
 

@@ -58,6 +58,21 @@ class Location(models.Model):
     #     super().save(*args, **kwargs)
 
 
+class FileUplaod(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        # db_index=True,  # new
+        default=uuid.uuid4,
+        editable=False)
+    file=models.FileField(blank=True, upload_to="covers/")
+
+    def __str__(self):
+        return self.file.name
+
+    def get_absolute_url(self):
+        return reverse('location_list')
+
+
 class Asset(models.Model,DynamicArrayMixin):
 
     id = models.UUIDField(
@@ -70,26 +85,8 @@ class Asset(models.Model,DynamicArrayMixin):
         default=1,
         on_delete=models.CASCADE,
     )
-
-    # Multi_Locations = ArrayField(
-    #     ArrayField(
-    #         models.CharField(max_length=100, null=True),size=2,
-    #     ),
-    #     null=True,
-    #     size=255
-    # )
-    # longitude1 = ArrayField(
-    #     models.CharField(max_length=100, null=True), size=2,
-    #     null=True,
-    #
-    # )
-    # latitude1 = ArrayField(
-    #     models.CharField(max_length=100, null=True), size=2,
-    #     null=True,
-    #
-    # )
-    Locations = models.ManyToManyField(Location , null=True)
-
+    Locations = models.ManyToManyField(Location)
+    files = models.ManyToManyField(FileUplaod)
     Expiry_date = models.DateField(null=True)
     Expiry_time = models.TimeField(null=True)
     multi_uploads = ArrayField(
