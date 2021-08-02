@@ -108,6 +108,7 @@ def AssetUpdateView(request, pk):
     Expiry_date = asset.Expiry_date.strftime("%Y-%m-%d")
     Expiry_time=asset.Expiry_time.strftime("%H:%M")
     count=len(asset.Locations.all())
+    uploaded_files=asset.multi_uploads
     long_lat=[]
     allAssets=[]
     for aset in asset.multi_uploads:
@@ -160,7 +161,7 @@ def AssetUpdateView(request, pk):
         "Expiry_time": Expiry_time,
         "count":count,
         "long_lat":long_lat,
-        "allAssetsNum":allAssetsNum
+        "uploaded_files":uploaded_files
     }
     return render(request, "Asset_edit.html", context)
 

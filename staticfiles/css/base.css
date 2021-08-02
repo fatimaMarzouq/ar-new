@@ -1,4 +1,11 @@
-
+.deletelink {
+    float: right;
+    text-indent: -9999px;
+    background: url(../static/admin/img/inline-delete.svg) 0 0 no-repeat;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+}
 .bookcover {
   height: 300px;
   width: auto;

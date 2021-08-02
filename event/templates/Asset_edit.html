@@ -104,6 +104,9 @@
 <!--&lt;!&ndash;                    Upload file&ndash;&gt;-->
 <!--                </label>-->
                 <div>
+                    <div id="uploaded_files">
+
+                    </div>
                      <div id="images">
                      </div>
                     <button  style="background-color:#00992D" class=" text-white my-5 px-16 py-3 rounded outline-none block" type="button" name="add_image" id="add_image"  value="Add Image">Add asset</button>
@@ -138,6 +141,7 @@
         <div>{{ allAssets }}</div>
      </form>
 <script>
+let uploaded_files={{uploaded_files | safe}};
 let long_lat= {{ long_lat | safe }};
 window.addEventListener("DOMContentLoaded", function(){
 
@@ -164,7 +168,21 @@ document.querySelector("#longitude" + i).value=long_lat[i-1].Long;
 
 
 });
+uploaded_files.forEach(function myFunction(item, index) {
+  let div=document.createElement("div");
+  div.style="display: flex;align-items: center;"
+  let asset=document.createElement("div");
+  asset.id="assetName";
+  asset.innerHTML=item;
+  let deleteDIV=document.createElement("div");
+  deleteDIV.id="Asset"+index;
+  deleteDIV.className="deletelink";
+  div.appendChild(asset);
+  div.appendChild(deleteDIV);
+  document.getElementById("uploaded_files").appendChild(div);
 
+
+});
     document.getElementById("add_image").onclick=function (ev) {
 
         var image=document.getElementById("images");
@@ -200,9 +218,8 @@ document.querySelector("#longitude" + i).value=long_lat[i-1].Long;
         image.appendChild(br1);
 
     }
-    for (let i=0 ;i<{{ allAssetsNum }};i++){
-    document.getElementById("add_image").click();
-    }
+
+
 </script>
     </div>
 <page-footer style="display:none;"></page-footer>
