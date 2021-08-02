@@ -166,24 +166,50 @@ document.querySelector("#longitude" + i).value=long_lat[i-1].Long;
       document.querySelector(".count").value=num;
      }
     };
-
-
-});
 uploaded_files.forEach(function myFunction(item, index) {
   let div=document.createElement("div");
   div.style="display: flex;align-items: center;"
   let asset=document.createElement("div");
-  asset.id="assetName";
+  asset.id="Asset"+index+"Name";
   asset.innerHTML=item;
-  let deleteDIV=document.createElement("div");
-  deleteDIV.id="Asset"+index;
-  deleteDIV.className="deletelink";
+  let deleteDIV=document.createElement("input");
+  let deleteLabel=document.createElement("label");
+  deleteLabel.setAttribute("for","Asset"+index);
+  deleteDIV.id=0;
+  deleteDIV.name="AssetInput";
+  deleteDIV.value=" ";
+  deleteDIV.className="Asset"+index;
+  deleteDIV.ariaLabel=item;
+  deleteLabel.className="deletelink";
+  deleteDIV.type="hidden";
   div.appendChild(asset);
   div.appendChild(deleteDIV);
+  div.appendChild(deleteLabel);
   document.getElementById("uploaded_files").appendChild(div);
 
+});
+
+let Items = document.querySelectorAll(".deletelink");
+
+Items.forEach(function(Item) {
+  Item.onclick=function(){
+         let AssetID=Item.htmlFor;
+         let inputValue = document.querySelector("."+AssetID).ariaLabel
+         if(document.querySelector("."+AssetID).id==="0"){
+         document.querySelector("."+AssetID).id="1";
+         document.querySelector("."+AssetID).value=inputValue;
+         document.querySelector("#"+AssetID+"Name").style="color:red;font-weight: 600;";}
+         else{
+         document.querySelector("."+AssetID).id="0";
+         document.querySelector("."+AssetID).value=" ";
+         document.querySelector("#"+AssetID+"Name").style="color:black;font-weight: normal;";}
+
+    };
+});
 
 });
+
+
     document.getElementById("add_image").onclick=function (ev) {
 
         var image=document.getElementById("images");

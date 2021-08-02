@@ -2,9 +2,11 @@
     float: right;
     text-indent: -9999px;
     background: url(../admin/img/inline-delete.svg) 0 0 no-repeat;
-    width: 16px;
-    height: 16px;
+        width: 20px;
+    height: 20px;
     border: 0px none;
+    background-size: 20px;
+    cursor: pointer;
 }
 .bookcover {
   height: 300px;

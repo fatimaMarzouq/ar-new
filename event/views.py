@@ -131,6 +131,12 @@ def AssetUpdateView(request, pk):
                 IDs.append(location.id)
                 im += 1
             files = request.FILES.getlist('file[]')
+            deletedAssets = request.POST.getlist('AssetInput')
+            for asset in deletedAssets :
+                if asset != " ":
+                    allAssets.remove(asset)
+
+            res = [*allAssets, *files]
 
             for asset in files:
                 fs = FileSystemStorage()
@@ -142,7 +148,7 @@ def AssetUpdateView(request, pk):
             # asset.Locations.set(IDs)
             obj, created = Asset.objects.update_or_create(
                 id=pk,
-                defaults={'multi_uploads':files, 'Expiry_date':request.POST['Expiry_date'],
+                defaults={'multi_uploads':res, 'Expiry_date':request.POST['Expiry_date'],
                           'Expiry_time':request.POST['Expiry_time'],},
             )
             obj.Locations.set(IDs)
