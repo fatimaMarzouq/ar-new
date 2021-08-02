@@ -63,19 +63,22 @@
      <nav class="w-1/5 border-r-2 pl-16">
          <ul>
              <li class="my-6">
-                 <a class="font-semibold text-md" href="{% url 'events' %}">Events</a>  <a class="text-sm text-green-400 capitalize hover:text-green-800" href="{% url 'event_new' %}">+New </a>
+                 <a class="font-semibold text-md" href="{% url 'Asset_new' %}">Add New Asset</a>
              </li>
              <li class="my-6">
-                 <a class="font-semibold text-md" href="{% url 'Assets_list' %}">Assets</a>  <a class="text-sm text-green-400 capitalize hover:text-green-800" href="{% url 'Asset_new' %}">+New </a>
+                 <a class="font-semibold text-md" href="{% url 'Assets_list' %}">Assets Management</a>
              </li>
              <li class="my-6">
-                 <a class="font-semibold text-md" href="{% url 'location_list' %}">Locations</a>  <a class="text-sm text-green-400 capitalize hover:text-green-800" href="{% url 'location_new' %}">+New </a>
+                 <a class="font-semibold text-md" href="{% url 'profile_edit' user.id %}">Account Settings</a>
+             </li>
+             <li class="my-6">
+                 <a class="font-semibold text-md" href="{% url 'profile' %}">Profile Settings</a>
              </li>
          </ul>
       </nav>
       {% endif %}
      <div class="container">
-         <div class="my-6 mx-auto">
+         <div class="my-6 mx-auto px-6">
 
     {% block content %}
     {% endblock content %}
