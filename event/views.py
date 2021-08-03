@@ -1,10 +1,10 @@
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, Http404
 from django.views.generic import TemplateView, ListView
 from .models import Event, Asset, Location ,FileUplaod
 from .forms import EventCreationForm, AssetCreationForm, LocationCreationForm
 from django.views.generic import ListView, DetailView  # new
 from django.urls import reverse_lazy
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.mixins import (
@@ -171,6 +171,30 @@ def AssetUpdateView(request, pk):
     }
     return render(request, "Asset_edit.html", context)
 
+
+def AssetDeleteView(request, pk):
+    # dictionary for initial data with
+    # field names as keys
+    # fetch the object related to passed id
+
+    obj = Asset.objects.get(pk=pk)
+
+    if request.method == "POST":
+        for loc in obj.Locations.all():
+            Location.objects.filter(id=loc.id).delete()
+        # delete object
+        # obj.delete()
+        Asset.objects.filter(id=pk).delete()
+
+        # after deleting redirect to
+        # home page
+        return redirect(reverse_lazy('Assets_list'))
+
+    context = {
+        "asset":obj,
+        "assetId": pk,
+    }
+    return render(request, "Asset_delete.html", context)
 # def asset_create(request):
 #     # if this is a POST request we need to process the form data
 #     print("hello")
@@ -252,10 +276,10 @@ class AssetDetailView(DetailView):
 # #     emailvalue= form.cleaned_data.get("email")
 
 
-class AssetDeleteView(DeleteView):
-    model = Asset
-    template_name = 'Asset_delete.html'
-    success_url = reverse_lazy('Assets_list')
+# class AssetDeleteView(DeleteView):
+#     model = Asset
+#     template_name = 'Asset_delete.html'
+#     success_url = reverse_lazy('Assets_list')
 
 
 class LocationListView(ListView):

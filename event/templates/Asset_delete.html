@@ -2,9 +2,9 @@
 
 {% block content %}
   <h1 class="ml-10">Delete</h1>
-  <form class="ml-10" action="" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "<a class="text-gray-400" href="/{{ asset.id }}/assets_details">{{ asset.id }}/assets_details</a>"?</p>
-    <button  style="background-color:#00992D" class=" text-white my-5 px-16 py-3 rounded outline-none block" type="button" >Confirm</button>
+  <form class="ml-10" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    <p>Are you sure you want to delete "<a class="text-gray-400" href="/{{ assetId }}/assets_details">{{ asset.id }}/assets_details</a>"?</p>
+    <button  style="background-color:#00992D" class=" text-white my-5 px-16 py-3 rounded outline-none block" value="submit" name="Submit" >Confirm</button>
 
   </form>
 {% endblock content %}
