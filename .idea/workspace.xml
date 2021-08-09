@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c33984d5-294c-420a-adba-59bd5720574d" name="Default Changelist" comment="6">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c33984d5-294c-420a-adba-59bd5720574d" name="Default Changelist" comment="7">
       <change beforePath="$PROJECT_DIR$/event/templates/Asset_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/event/templates/Asset_detail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,13 +76,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1624440366781</updated>
-    </task>
-    <task id="LOCAL-00055" summary="muliple locations and assets">
-      <created>1625146254360</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1625146254360</updated>
     </task>
     <task id="LOCAL-00056" summary="muliple locations and assets">
       <created>1625381169818</created>
@@ -421,7 +413,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628508305505</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="7">
+      <created>1628509616381</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1628509616381</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -458,6 +457,7 @@
     <MESSAGE value="3" />
     <MESSAGE value="5" />
     <MESSAGE value="6" />
-    <option name="LAST_COMMIT_MESSAGE" value="6" />
+    <MESSAGE value="7" />
+    <option name="LAST_COMMIT_MESSAGE" value="7" />
   </component>
 </project>
