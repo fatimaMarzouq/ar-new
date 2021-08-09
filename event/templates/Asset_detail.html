@@ -12,10 +12,14 @@
 
     <body style="margin: 0; overflow: hidden;">
         <a-scene
-            renderer="logarithmicDepthBuffer: true;"
             embedded
-            loading-screen="enabled: false;"
-            arjs="sourceType: webcam; debugUIEnabled: false;"
+            loading-screen="enabled: true;"
+            arjs="sourceType: webcam; debugUIEnabled: true;"
+            mindar="imageTargetSrc: ./targets.mind; showStats: true;"
+            color-space="sRGB"
+            renderer="colorManagement: true, physicallyCorrectLights,logarithmicDepthBuffer: true;"
+            vr-mode-ui="enabled: true"
+            device-orientation-permission-ui="enabled: true"
         >
             <a-assets>
             {% for asset in  object.multi_uploads %}
