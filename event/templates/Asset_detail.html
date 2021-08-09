@@ -37,7 +37,7 @@
                     gps-entity-place="latitude: {{ location.Latitude1 }}; longitude: {{ location.Longitude1 }};"
                 ></a-entity>
             {% endfor %}
-
+            <a-marker-camera preset='hiro'></a-marker-camera>
             <a-camera gps-camera rotation-reader></a-camera>
         </a-scene>
     </body>
